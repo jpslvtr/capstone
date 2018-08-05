@@ -39,3 +39,44 @@
 [info] i  hosting: Serving hosting files from: public
 [info] ✔  hosting: Local server: http://localhost:5000
 
+[debug] [2018-08-05T19:19:40.103Z] ----------------------------------------------------------------------
+[debug] [2018-08-05T19:19:40.104Z] Command:       /usr/bin/node /usr/local/bin/firebase serve
+[debug] [2018-08-05T19:19:40.104Z] CLI Version:   4.0.2
+[debug] [2018-08-05T19:19:40.104Z] Platform:      linux
+[debug] [2018-08-05T19:19:40.105Z] Node Version:  v8.10.0
+[debug] [2018-08-05T19:19:40.105Z] Time:          Sun Aug 05 2018 15:19:40 GMT-0400 (EDT)
+[debug] [2018-08-05T19:19:40.105Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-08-05T19:19:40.113Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-08-05T19:19:40.114Z] > authorizing via signed-in user
+[debug] [2018-08-05T19:19:40.115Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-08-05T19:19:40.115Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/cVQDEelHZimD3Q5XuG-tDh2fl-65c89I3fktz8617QI',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sun Aug 05 2018 15:19:40 GMT-0400 (EDT)
+[debug] [2018-08-05T19:19:40.373Z] <<< HTTP RESPONSE 200
+[debug] [2018-08-05T19:19:40.382Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/tchalla-id  
+  
+ Sun Aug 05 2018 15:19:40 GMT-0400 (EDT)
+[debug] [2018-08-05T19:19:41.987Z] <<< HTTP RESPONSE 200
+[debug] [2018-08-05T19:19:41.987Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/tchalla-id/tokens  
+  
+ Sun Aug 05 2018 15:19:41 GMT-0400 (EDT)
+[debug] [2018-08-05T19:19:42.401Z] <<< HTTP RESPONSE 200
+[debug] [2018-08-05T19:19:42.402Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/tchalla-id  
+  
+ Sun Aug 05 2018 15:19:42 GMT-0400 (EDT)
+[debug] [2018-08-05T19:19:43.089Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/kurt/lend/tchalla'...
+[info] 
+[debug] [2018-08-05T19:19:43.092Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/392551642195/clients/_:getWebAppConfig  
+  
+ Sun Aug 05 2018 15:19:43 GMT-0400 (EDT)
+[debug] [2018-08-05T19:19:44.342Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
