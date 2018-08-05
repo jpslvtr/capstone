@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Testing</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.3.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.3.0/firebase-auth.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <!-- Pertinent sign-in script -->
+    <script defer src="../kurt_debug/login.js"></script>
+
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap-social.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
+          <h2>
+            Login/Sign-up Testing
+          </h2>
+        </div>
+      </div>
+
+      <!-- buttons for signing into Lending App -->
+      <div id="signup_buttons">
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-5">
+            <div type="button" onclick=signupUser("facebook") class="btn btn-social btn-facebook w-75 text-center">
+              <span class="fa fa-facebook"></span>
+              Sign-up with Facebook
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-5">
+            <div type="button" onclick=signupUser("google") class="btn btn-social btn-google w-75 text-center">
+              <span class="fa fa-google"></span>
+              Sign-up with Google
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-5">
+            <div type="button" onclick=signupUser("email") class="btn btn-social w-75 text-center">
+              <span class="fa fa-user"></span>
+              Sign-up with Email
+            </div>
+          </div>
+        </div>
+      </div> <!-- End of sign up buttons -->
+
+      <div class="row">
+        <div class="col-md-5">
+          <div id="signed_in_area">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
