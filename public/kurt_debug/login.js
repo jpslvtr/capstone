@@ -51,6 +51,17 @@ function signupUser(method, email, password){
 
 }
 
+function loginUser(email, password){
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    return false;
+    // ...
+  });
+  return true;
+}
+
 function validateEmail(email, email_alert) {
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if(!re.test(email.value)){
@@ -166,6 +177,49 @@ function validateSignupModal(){
 
 }
 
+function validateLoginModal(){
+  var email = document.getElementById("login_email_entry");
+  var pass = document.getElementById("login_password_entry");
+
+  var email_alert = document.getElementById("login_email_alert");
+  var pass_alert = document.getElementById("login_password_alert");
+
+  var valid = true;
+
+  if(email.value == "" ){
+    email_alert.innerHTML = "Please enter an email";
+    email.focus();
+    valid = false;
+  }
+  else if(!validateEmail(email, email_alert)){
+    valid = false;
+  }
+  else{
+    email_alert.innerHTML = "";
+  }
+
+  if(pass.value == "" ){
+    pass_alert.innerHTML = "Please enter a password";
+    pass.focus();
+    valid = false;
+  }
+  else{
+    pass_alert.innerHTML = "";
+  }
+
+  if(valid){
+    if(!loginUser(email.value, pass.value)){
+      email_alert.innerHTML = "Your email/password combo is incorrect";
+      email_entry.focus();
+    }
+    else{
+      $('#loginModal').modal('hide');
+    }
+  }
+
+}
+
+
 function signoutUser(){
   console.log("User signing out");
   firebase.auth().signOut().then(function() {
@@ -191,10 +245,14 @@ document.getElementById("password_entry").addEventListener("input", function(){
 document.getElementById("password_confirmation").addEventListener("input", function(){
   validatePasswordConfirmation(document.getElementById("password_entry"), document.getElementById("password_confirmation"), document.getElementById("password_confirmation_alert"))
 });
+document.getElementById("login_email_entry").addEventListener("input", function(){
+  validateEmail(document.getElementById("login_email_entry"), document.getElementById("login_email_alert"))
+});
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("User is signed in");
+    console.log("User verification status: " + user['emailVerified']);
     document.getElementById("signup_buttons").innerHTML = "";
 
     var userData = JSON.stringify(user);

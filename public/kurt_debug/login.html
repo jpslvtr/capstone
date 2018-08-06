@@ -39,14 +39,14 @@
         </div>
       </div>
 
-      <!-- buttons for signing into Lending App -->
-      <div id="signup_buttons">
+      <!-- buttons for signing into Lending App / Logging into system -->
+      <div id="signup_buttons" class="text-center">
         <div class="row">
           <div class="col-md-3">
           </div>
           <div class="col-md-5">
             <div type="button" onclick=signupUser("facebook") class="btn btn-social btn-facebook w-75 text-center">
-              <span class="fa fa-facebook"></span>
+              <span class="fa fa-facebook" style="width:2.5rem;"></span>
               Sign-up with Facebook
             </div>
           </div>
@@ -59,7 +59,7 @@
           </div>
           <div class="col-md-5">
             <div type="button" onclick=signupUser("google") class="btn btn-social btn-google w-75 text-center">
-              <span class="fa fa-google"></span>
+              <span class="fa fa-google" style="width:2.5rem;"></span>
               Sign-up with Google
             </div>
           </div>
@@ -71,13 +71,43 @@
           <div class="col-md-3">
           </div>
           <div class="col-md-5">
-            <div type="button" class="btn btn-social w-75 text-center" data-toggle="modal" data-target="#signupModal">
-              <span class="fa fa-user"></span>
-              Sign-up with Email
+            <div type="button" class="btn btn-social btn-info w-75 text-center" data-toggle="modal" data-target="#signupModal">
+              <span class="fa fa-user-plus" style="width:2.5rem;"></span>
+              Create an account with an Email
             </div>
           </div>
         </div>
-      </div> <!-- End of sign up buttons -->
+
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-5">
+            <hr class="wd-75"/>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <br />
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-5 text-center w-75">
+            Already a user? Login below:
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-5">
+            <div type="button" class="btn btn-social w-75 text-center" data-toggle="modal" data-target="#loginModal">
+              <span class="fa fa-user" style="width:2.5rem;"></span>
+              Login with Email
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- End of sign up buttons/login buttons-->
 
       <div class="row">
         <div class="col-md-5">
@@ -88,7 +118,7 @@
 
     </div>
 
-    <!-- The Modal (contains the Sign Up form) -->
+    <!-- This Modal contains the Sign Up form -->
       <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -143,6 +173,41 @@
           </div>
         </div>
       </div>
+
+      <!-- This Modal contains the Login form -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2> Email Login </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+
+                  <div>
+                      <i class="fa fa-envelope prefix grey-text"></i>
+                      <div id="login_email_alert" class="text-danger"></div>
+                      <input type="email" id="login_email_entry" class="form-control validate w-75">
+                      <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                  </div>
+
+                  <div>
+                      <i class="fa fa-lock prefix grey-text"></i>
+                      <div id="login_password_alert" class="text-danger"></div>
+                      <input type="password" id="login_password_entry" class="form-control validate w-75">
+                      <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                  </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick=validateLoginModal()>Login Up</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
   </body>
