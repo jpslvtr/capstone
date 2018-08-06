@@ -51,17 +51,6 @@ function signupUser(method, email, password){
 
 }
 
-function loginUser(email, password){
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    return false;
-    // ...
-  });
-  return true;
-}
-
 function validateEmail(email, email_alert) {
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if(!re.test(email.value)){
@@ -208,17 +197,23 @@ function validateLoginModal(){
   }
 
   if(valid){
-    if(!loginUser(email.value, pass.value)){
-      email_alert.innerHTML = "Your email/password combo is incorrect";
-      email_entry.focus();
-    }
-    else{
-      $('#loginModal').modal('hide');
-    }
+    console.log("In login function with: " + email.value + " " + pass.value);
+    firebase.auth().signInWithEmailAndPassword(email.value, pass.value)
+      .then(result => {
+        email_alert.innerHTML = "";
+        $("#loginModal").modal('hide');
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        email_alert.innerHTML = "Email/password combination incorrect";
+        email.focus();
+        // ...
+      });
+
   }
-
 }
-
 
 function signoutUser(){
   console.log("User signing out");
@@ -235,7 +230,15 @@ function add_signout_button(){
   area.innerHTML += '<div type="button" class="btn btn-danger" onclick=signoutUser()>Sign Out</div>'
 }
 
-//Event listeners for the modal inputs
+//Virtually clicks the button when user hits enter on keyboard
+function clickButton(event, button_id){
+  event.preventDefault();
+  if(event.keyCode === 13){
+    document.getElementById(button_id).click();
+  }
+}
+
+//Input listeners for the modal inputs
 document.getElementById("email_entry").addEventListener("input", function(){
   validateEmail(document.getElementById("email_entry"), document.getElementById("email_alert"))
 });
@@ -249,6 +252,39 @@ document.getElementById("login_email_entry").addEventListener("input", function(
   validateEmail(document.getElementById("login_email_entry"), document.getElementById("login_email_alert"))
 });
 
+//Enter listeners for the modals
+document.getElementById("email_entry").addEventListener("keyup", function(event){
+  event.preventDefault();
+  if(event.keyCode === 13){
+    document.getElementById("signup_email_button");
+  }
+});
+document.getElementById("password_entry").addEventListener("keyup",function(event){
+  event.preventDefault();
+  if(event.keyCode === 13){
+    document.getElementById("signup_email_button");
+  }
+});
+document.getElementById("password_confirmation").addEventListener("keyup", function(event){
+  event.preventDefault();
+  if(event.keyCode === 13){
+    document.getElementById("signup_email_button");
+  }
+});
+document.getElementById("login_email_entry").addEventListener("keyup", function(event){
+  event.preventDefault();
+  if(event.keyCode === 13){
+    document.getElementById("login_email_button");
+  }
+});
+document.getElementById("login_password_entry").addEventListener("keyup", function(event){
+  event.preventDefault();
+  if(event.keyCode === 13 || event.which === 13){
+    document.getElementById("login_email_button");
+  }
+});
+
+//Triggered when the user changes their auth state
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("User is signed in");
