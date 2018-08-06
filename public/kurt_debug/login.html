@@ -71,7 +71,7 @@
           <div class="col-md-3">
           </div>
           <div class="col-md-5">
-            <div type="button" onclick=signupUser("email") class="btn btn-social w-75 text-center">
+            <div type="button" class="btn btn-social w-75 text-center" data-toggle="modal" data-target="#signupModal">
               <span class="fa fa-user"></span>
               Sign-up with Email
             </div>
@@ -87,5 +87,63 @@
       </div>
 
     </div>
+
+    <!-- The Modal (contains the Sign Up form) -->
+      <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2> Email Sign-up </h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body mx-3">
+
+                <div>
+                    <i class="fa fa-envelope prefix grey-text"></i>
+                    <div id="email_alert" class="text-danger"></div>
+                    <input type="email" id="email_entry" class="form-control validate w-75">
+                    <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                </div>
+
+                <div>
+                    <i class="fa fa-lock prefix grey-text"></i>
+                    <div id="password_alert" class="text-danger"></div>
+                    <input type="password" id="password_entry" class="form-control validate w-75">
+                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                </div>
+
+                <div>
+                    <i class="fa fa-lock prefix grey-text"></i>
+                    <div id="password_confirmation_alert" class="text-danger"></div>
+                    <input type="password" id="password_confirmation" class="form-control validate w-75">
+                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Confirm password</label>
+                    <br>
+                    <small>
+                      Passwords must:
+                      <br>
+                       - Be at least 8 characters long
+                       <br>
+                       - Contain at least one number
+                       <br>
+                       - Contain one capital letter
+                       <br>
+                       - Contain one lowercase letter
+                       <br><br>
+                      Passwords cannot contain illegal characters (e.g. <>!@#$%^&*',"\/);
+                    </small>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick=validateSignupModal()>Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
   </body>
 </html>
