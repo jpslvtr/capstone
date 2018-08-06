@@ -45,6 +45,7 @@ function signupUser(method, email, password){
       var errorCode = error.code;
       var errorMessage = error.message;
       // ...
+      return false;
     });
   }
 
@@ -154,8 +155,13 @@ function validateSignupModal(){
   }
 
   if(valid){
-    signupUser("email", email.value, pass.value);
-    $('#signupModal').modal('hide');
+    if(!signupUser("email", email.value, pass.value)){
+      email_alert.innerHTML = "This email is already in use";
+      email_entry.focus();
+    }
+    else{
+      $('#signupModal').modal('hide');
+    }
   }
 
 }
