@@ -39,16 +39,6 @@ function signupUser(method, email, password){
     });
   }
 
-  if(method == "email"){
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-      return false;
-    });
-  }
-
 }
 
 function validateEmail(email, email_alert) {
@@ -155,13 +145,19 @@ function validateSignupModal(){
   }
 
   if(valid){
-    if(!signupUser("email", email.value, pass.value)){
+    firebase.auth().createUserWithEmailAndPassword(email.value, pass.value)
+    .then(result => {
+      email_alert.innerHTML = "";
+      $("#signupModal").modal('hide');
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
       email_alert.innerHTML = "This email is already in use";
-      email_entry.focus();
-    }
-    else{
-      $('#signupModal').modal('hide');
-    }
+      email.focus();
+      // ...
+    });
   }
 
 }
@@ -197,7 +193,6 @@ function validateLoginModal(){
   }
 
   if(valid){
-    console.log("In login function with: " + email.value + " " + pass.value);
     firebase.auth().signInWithEmailAndPassword(email.value, pass.value)
       .then(result => {
         email_alert.innerHTML = "";
@@ -207,7 +202,12 @@ function validateLoginModal(){
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        email_alert.innerHTML = "Email/password combination incorrect";
+        if(errorCode == "auth/user-not-found"){
+          email_alert.innerHTML = "We can't find a user with that email";
+        }
+        else{
+          email_alert.innerHTML = "Email/password combination incorrect";
+        }
         email.focus();
         // ...
       });
@@ -238,6 +238,10 @@ function clickButton(event, button_id){
   }
 }
 
+function refreshPage(){
+  location.reload();
+}
+
 //Input listeners for the modal inputs
 document.getElementById("email_entry").addEventListener("input", function(){
   validateEmail(document.getElementById("email_entry"), document.getElementById("email_alert"))
@@ -253,42 +257,40 @@ document.getElementById("login_email_entry").addEventListener("input", function(
 });
 
 //Enter listeners for the modals
-document.getElementById("email_entry").addEventListener("keyup", function(event){
-  event.preventDefault();
-  if(event.keyCode === 13){
-    document.getElementById("signup_email_button");
+$("body").on('keyup', '#login_email_entry', function(event){
+  var code = event.keyCode;
+  if(code === 13){
+    document.getElementById("login_modal_button").click();
   }
 });
-document.getElementById("password_entry").addEventListener("keyup",function(event){
-  event.preventDefault();
-  if(event.keyCode === 13){
-    document.getElementById("signup_email_button");
+$("body").on('keyup', '#login_password_entry', function(event){
+  var code = event.keyCode;
+  if(code === 13){
+    document.getElementById("login_modal_button").click();
   }
 });
-document.getElementById("password_confirmation").addEventListener("keyup", function(event){
-  event.preventDefault();
-  if(event.keyCode === 13){
-    document.getElementById("signup_email_button");
+$("body").on('keyup', '#email_entry', function(event){
+  var code = event.keyCode;
+  if(code === 13){
+    document.getElementById("signup_modal_button").click();
   }
 });
-document.getElementById("login_email_entry").addEventListener("keyup", function(event){
-  event.preventDefault();
-  if(event.keyCode === 13){
-    document.getElementById("login_email_button");
+$("body").on('keyup', '#password_entry', function(event){
+  var code = event.keyCode;
+  if(code === 13){
+    document.getElementById("signup_modal_button").click();
   }
 });
-document.getElementById("login_password_entry").addEventListener("keyup", function(event){
-  event.preventDefault();
-  if(event.keyCode === 13 || event.which === 13){
-    document.getElementById("login_email_button");
+$("body").on('keyup', '#password_confirmation', function(event){
+  var code = event.keyCode;
+  if(code === 13){
+    document.getElementById("signup_modal_button").click();
   }
 });
 
 //Triggered when the user changes their auth state
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    console.log("User is signed in");
-    console.log("User verification status: " + user['emailVerified']);
     document.getElementById("signup_buttons").innerHTML = "";
 
     var userData = JSON.stringify(user);
