@@ -24,7 +24,10 @@ function sendValidateEmail(){
 }
 
 firebase.auth().onAuthStateChanged(function(user){
-  firebase.auth().currentUser.reload();
+  var curUser = firebase.auth().currentUser;
+  if(curUser != null){
+    curUser.reload();
+  }
   if (user) {
     if(!user['emailVerified']){
       console.log("HERE");
