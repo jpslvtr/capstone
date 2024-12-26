@@ -25,4 +25,4 @@ This project demonstrates components of a system that collects tweets from Fortu
 
 MIT License
 
-Copyright (c) 2024
+Copyright &copy; 2024
